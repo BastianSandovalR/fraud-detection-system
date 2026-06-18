@@ -1,0 +1,19 @@
+# Entornos virtuales
+venv/
+env/
+__pycache__/
+
+# Archivos de entorno y credenciales
+.env
+
+# Datos (NUNCA subimos datos a Git)
+data/
+*.csv
+*.parquet
+*.json
+*.db
+
+# Modelos y logs de MLflow
+mlruns/
+*.pkl
+*.model
