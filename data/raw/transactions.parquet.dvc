@@ -1,0 +1,5 @@
+outs:
+- md5: d4b5f0031163dbe7b42493566a94a01d
+  size: 6064215
+  hash: md5
+  path: transactions.parquet

@@ -7,7 +7,7 @@ __pycache__/
 .env
 
 # Datos (NUNCA subimos datos a Git)
-data/
+
 *.csv
 *.parquet
 *.json
@@ -18,3 +18,4 @@ mlruns/
 *.pkl
 *.model
 airflow/
+!*.dvc
