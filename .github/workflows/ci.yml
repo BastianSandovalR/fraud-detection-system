@@ -16,11 +16,11 @@ jobs:
     steps:
     # Paso A: Descargar tu código desde el repositorio
     - name: 📥 Checkout del código
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # Paso B: Instalar Python en esa máquina vacía
     - name: 🐍 Configurar Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
