@@ -40,7 +40,7 @@ graph TD
     end
 
     %% Asignación de colores
-    A:::data; B:::data; C:::data; D:::data; E:::model; F:::model;
+    A:::data; B:::data; C:::data; D:::data; E:::model; F:::model; ```
 El ciclo de vida del proyecto está dividido en dos flujos principales:
 1. **Flujo de Datos (Data Pipeline):** Orquestado por Apache Airflow, extrae datos crudos, calcula topologías de red (PageRank) en Neo4j y reentrena modelos XGBoost rastreando artefactos en DagsHub (MLflow remoto).
 2. **Flujo de Código (CI/CD):** Las modificaciones en el código disparan flujos de GitHub Actions que ejecutan pruebas de calidad (Flake8) y construyen imágenes Docker inmutables para el despliegue de la API (FastAPI).
