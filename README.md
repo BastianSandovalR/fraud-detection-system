@@ -39,24 +39,43 @@ graph TD
     %% Asignación de colores
     A:::data; B:::data; C:::data; D:::data; E:::model; F:::model;
 ```
+## 📂 Estructura del Proyecto
 
-[cite_start]El ciclo de vida del proyecto está dividido en dos flujos principales[cite: 1864]:
+El repositorio sigue un estándar modular para separar la lógica de extracción, entrenamiento y despliegue:
 
-1. [cite_start]**Flujo de Datos (Data Pipeline):** Orquestado por Apache Airflow, extrae datos crudos, calcula topologías de red (PageRank) en Neo4j y reentrena modelos XGBoost rastreando artefactos en DagsHub (MLflow remoto)[cite: 1864].
-2. [cite_start]**Flujo de Código (CI/CD):** Las modificaciones en el código disparan flujos de GitHub Actions que ejecutan pruebas de calidad (Flake8) y construyen imágenes Docker inmutables para el despliegue de la API (FastAPI)[cite: 1865].
+```text
+fraud-detection-system/
+├── .github/workflows/   # Pipelines de CI/CD para GitHub Actions
+├── dags/                # DAGs de Apache Airflow para orquestación automática
+├── data/
+│   └── raw/             # Datos masivos versionados remotamente (Archivos .dvc)
+├── src/
+│   ├── api/             # Microservicio de Inferencia (FastAPI)
+│   ├── data/            # Ingesta y limpieza (PySpark) e inyección de grafos (Neo4j)
+│   ├── features/        # Graph Data Science (PageRank) y consolidación de features
+│   └── models/          # Entrenamiento (XGBoost + MLflow) y Monitoreo (Evidently AI)
+├── docker-compose.yml   # Plano de infraestructura local (API + Base de Datos)
+├── Dockerfile           # Receta de empaquetado del contenedor de predicción
+├── requirements.txt     # Dependencias de Python
+└── README.md            # Documentación del proyecto
+
+El ciclo de vida del proyecto está dividido en dos flujos principales:
+
+1. **Flujo de Datos (Data Pipeline):** Orquestado por Apache Airflow, extrae datos crudos, calcula topologías de red (PageRank) en Neo4j y reentrena modelos XGBoost rastreando artefactos en DagsHub (MLflow remoto).
+2. **Flujo de Código (CI/CD):** Las modificaciones en el código disparan flujos de GitHub Actions que ejecutan pruebas de calidad (Flake8) y construyen imágenes Docker inmutables para el despliegue de la API (FastAPI).
 
 ## 🛠️ Stack Tecnológico
 
-* [cite_start]**Orquestación & CI/CD:** Apache Airflow, GitHub Actions [cite: 1866]
-* [cite_start]**Feature Engineering & Grafos:** Polars, Apache Spark, Neo4j [cite: 1866]
-* [cite_start]**Modelado predictivo:** XGBoost [cite: 1866]
-* [cite_start]**MLOps & Control de Versiones:** DVC (Data Version Control), MLflow (DagsHub) [cite: 1866]
-* [cite_start]**Observabilidad:** Evidently AI [cite: 1866]
-* [cite_start]**Despliegue:** FastAPI, Docker [cite: 1866]
+* **Orquestación & CI/CD:** Apache Airflow, GitHub Actions
+* **Feature Engineering & Grafos:** Polars, Apache Spark, Neo4j
+* **Modelado predictivo:** XGBoost
+* **MLOps & Control de Versiones:** DVC (Data Version Control), MLflow (DagsHub)
+* **Observabilidad:** Evidently AI
+* **Despliegue:** FastAPI, Docker
 
 ## 🚀 Cómo reproducir este proyecto
 
-[cite_start]Este proyecto está diseñado bajo el estándar de "Reproducibilidad Total"[cite: 1866]. [cite_start]Para ejecutar este sistema localmente y descargar los datos exactos del entrenamiento original[cite: 1867]:
+Este proyecto está diseñado bajo el estándar de "Reproducibilidad Total". Para ejecutar este sistema localmente y descargar los datos exactos del entrenamiento original:
 
 **1. Clonar el repositorio y configurar el entorno**
 ```bash
@@ -68,19 +87,19 @@ pip install -r requirements.txt
 ```
 
 **2. Descargar los datos masivos (Vía DVC)**
-Los archivos pesados (`.parquet`) están almacenados de forma segura en la nube. [cite_start]Simplemente ejecuta[cite: 1868]:
+Los archivos pesados (`.parquet`) están almacenados de forma segura en la nube. Simplemente ejecuta:
 ```bash
 dvc pull
 ```
 
 **3. Levantar la Infraestructura**
-[cite_start]Levanta la API de Inferencia y la Base de Datos de Grafos usando los contenedores pre-configurados[cite: 1869]:
+Levanta la API de Inferencia y la Base de Datos de Grafos usando los contenedores pre-configurados:
 ```bash
 docker-compose up -d
 ```
 
 **4. Opcional: Reentrenar el Modelo**
-[cite_start]Si deseas interactuar con el pipeline local y registrar tu propio modelo[cite: 1869]:
+Si deseas interactuar con el pipeline local y registrar tu propio modelo:
 ```bash
 python src/models/train_model.py
 ```
