@@ -58,7 +58,7 @@ fraud-detection-system/
 ├── Dockerfile           # Receta de empaquetado del contenedor de predicción
 ├── requirements.txt     # Dependencias de Python
 └── README.md            # Documentación del proyecto
-
+```
 El ciclo de vida del proyecto está dividido en dos flujos principales:
 
 1. **Flujo de Datos (Data Pipeline):** Orquestado por Apache Airflow, extrae datos crudos, calcula topologías de red (PageRank) en Neo4j y reentrena modelos XGBoost rastreando artefactos en DagsHub (MLflow remoto).
@@ -103,3 +103,5 @@ Si deseas interactuar con el pipeline local y registrar tu propio modelo:
 ```bash
 python src/models/train_model.py
 ```
+
+
